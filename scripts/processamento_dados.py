@@ -4,41 +4,41 @@ import csv
 class Dados:
     
     def __init__(self, path, tipo_dados):
-        self.path = path
-        self.tipo_dados = tipo_dados
-        self.dados = self.leitura_dados()
-        self.nome_colunas = self.get_columns()
-        self.quantidade_linhas = self.size_data()
+        self.__path = path
+        self.__tipo_dados = tipo_dados
+        self.dados = self.__leitura_dados()
+        self.nome_colunas = self.__get_columns()
+        self.quantidade_linhas = self.__size_data()
         
-    def leitura_json(self):
+    def __leitura_json(self):
         dados_json = []
-        with open(self.path, 'r') as file:
+        with open(self.__path, 'r') as file:
             dados_json = json.load(file)
         return dados_json
 
-    def leitura_csv(self):
+    def __leitura_csv(self):
         dados_csv = []
-        with open(self.path, 'r') as file:
+        with open(self.__path, 'r') as file:
             spamreader = csv.DictReader(file, delimiter=',')
             for row in spamreader:
                 dados_csv.append(row)
         return dados_csv
 
-    def leitura_dados(self):
-        if self.tipo_dados == 'json':
-            dados_json = self.leitura_json()
+    def __leitura_dados(self):
+        if self.__tipo_dados == 'json':
+            dados_json = self.__leitura_json()
             return dados_json
         
-        elif self.tipo_dados == 'csv':
-            dados_csv = self.leitura_csv()
+        elif self.__tipo_dados == 'csv':
+            dados_csv = self.__leitura_csv()
             return dados_csv
         
-        elif self.tipo_dados == 'list':
-            dados = self.path
-            self.path = 'Lista em memoria'
+        elif self.__tipo_dados == 'list':
+            dados = self.__path
+            self.__path = 'Lista em memoria'
             return dados
         
-    def get_columns(self):
+    def __get_columns(self):
         return list(self.dados[-1].keys())
     
       
@@ -52,9 +52,9 @@ class Dados:
             new_dados.append(dict_temp)
             
         self.dados = new_dados
-        self.nome_colunas = self.get_columns()
+        self.nome_colunas = self.__get_columns()
     
-    def size_data(self):
+    def __size_data(self):
         return len(self.dados)
     
     
@@ -64,7 +64,7 @@ class Dados:
         combined_list.extend(dadosB.dados)
         return Dados(combined_list, 'list')
     
-    def transformando_dados_tabela(self):
+    def __transformando_dados_tabela(self):
         dados_combinados_tabela = [self.nome_colunas]
 
         for row in self.dados:
@@ -75,7 +75,7 @@ class Dados:
         return dados_combinados_tabela
     
     def salvando_dados_fusao(self, path):
-        dados_combinados_tabela = self.transformando_dados_tabela()
+        dados_combinados_tabela = self.__transformando_dados_tabela()
         with open(path, 'w') as file:
             writer = csv.writer(file)
             writer.writerows(dados_combinados_tabela)

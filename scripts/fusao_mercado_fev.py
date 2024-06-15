@@ -7,7 +7,7 @@ path_dados_combinados = 'data_processed/dados_combinados.csv'
 
 #Extract
 
-print('Extração dos Dados Empresa A - Empresa B')
+print('***Extração dos Dados Empresa A - Empresa B***')
 print('---------------------------------------------')
 
 dados_empresaA = Dados(path_json, 'json')
@@ -25,9 +25,9 @@ print(f'Colunas Empresa B {dados_empresaB.nome_colunas}')
 print('---------------------------------------------')
 
 
-#transformação
+#Transform
 
-print('Transformação dos Dados Empresa A - Empresa B')
+print('***Transformação dos Dados Empresa A - Empresa B***')
 print('---------------------------------------------')
 key_mapping = {'Nome do Item': 'Nome do Produto',
                 'Classificação do Produto': 'Categoria do Produto',
@@ -53,7 +53,7 @@ print(f'Quantidade de Linhas dos Dados da Fusao : {dados_fusao.quantidade_linhas
 
 #Load
 print('---------------------------------------------')
-print('Salvando Arquivo da fusão')
+print('***Salvando Arquivo da fusão***')
 dados_fusao.salvando_dados_fusao(path_dados_combinados)
 print('---------------------------------------------')
 print(f'Dados salvo com sucesso em : {path_dados_combinados}')
