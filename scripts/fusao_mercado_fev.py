@@ -1,5 +1,6 @@
 import json
 import csv
+from processamento_dados import Dados
 
 
 def leitura_json(path_json):
@@ -63,6 +64,8 @@ def salvando_dados_fusao(path, dados_fusao):
 path_json = 'data_raw/dados_empresaA.json'
 path_csv = 'data_raw/dados_empresaB.csv'
 path_dados_combinados = 'data_processed/dados_combinados.csv'
+
+
 
 
 # Inciando a Leitura
