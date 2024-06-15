@@ -3,28 +3,6 @@ import csv
 from processamento_dados import Dados
 
 
-def leitura_json(path_json):
-    dados_json = []
-    with open(path_json, 'r') as file:
-        dados_json = json.load(file)
-    return dados_json
-
-def leitura_csv(path_csv):
-    dados_csv = []
-    with open(path_csv, 'r') as file:
-        spamreader = csv.DictReader(file, delimiter=',')
-        for row in spamreader:
-            dados_csv.append(row)
-    return dados_csv
-
-def leitura_dados(path, tipo_arquivo):
-    if tipo_arquivo == 'json':
-        dados_json = leitura_json(path_json)
-        return dados_json
-    elif tipo_arquivo == 'csv':
-        dados_csv = leitura_csv(path_csv)
-        return dados_csv
-    
 def get_columns(dados):
     return list(dados[-1].keys())
     
@@ -65,15 +43,13 @@ path_json = 'data_raw/dados_empresaA.json'
 path_csv = 'data_raw/dados_empresaB.csv'
 path_dados_combinados = 'data_processed/dados_combinados.csv'
 
+#Extract
+dados_empresaA = Dados(path_json, 'json')
+dados_empresaB = Dados(path_csv, 'csv')
 
+print(dados_empresaA.dados[0])
+print(dados_empresaB.dados[0])
 
-
-# Inciando a Leitura
-dados_json = leitura_dados(path_json, 'json')
-print(f'Dados Json {dados_json[0]}')
-
-dados_csv = leitura_dados(path_csv, 'csv')
-print(f'Dados CSV {dados_csv[0]}')
 
 nome_colunas_json = get_columns(dados_json)
 nome_colunas_csv = get_columns(dados_csv)
